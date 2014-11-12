@@ -116,4 +116,6 @@ $Dispatcher->dispatch(
 
 // ベンチマーク終了
 $bench->end();
-debug($bench);
+debug($bench->getTime());
+debug($bench->getMemoryUsage());
+debug($bench->getMemoryPeak());
