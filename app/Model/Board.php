@@ -41,6 +41,7 @@ class Board extends AppModel {
             'upload-file' => array(
                 'rule' => array( 'uploadError'),
                 'message' => array( 'Error uploading file'),
+                'allowEmpty' => true,
                 'last' => true,
             ),
             'extension' => array(
@@ -74,4 +75,11 @@ class Board extends AppModel {
 			'order' => ''
 		)
 	);
+
+    function beforeValidate($options = array()){
+        if(empty($this->data[$this->alias]["img"]['name'])) {
+            unset($this->data[$this->alias]["img"]);
+        }
+        return true;
+    }
 }

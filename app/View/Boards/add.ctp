@@ -5,7 +5,7 @@
 	<?php
 		echo $this->Form->input('user_id');
 		echo $this->Form->input('content');
-        echo $this->Form->input('img', array('type' => 'file', 'required' => false));
+        echo $this->Form->input('img', array('type' => 'file'));
         echo $this->Form->error('img_pass');
 	?>
 	</fieldset>
