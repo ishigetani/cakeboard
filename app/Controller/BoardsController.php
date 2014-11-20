@@ -47,8 +47,12 @@ class BoardsController extends AppController {
  */
 	public function add() {
 		if ($this->request->is('post')) {
-			$this->Board->create();
+            if (!empty($this->request->data['Board']['img'])) {
+                $this->request->data['Board']['img_pass'] = $this->request->data['Board']['img']['name'];
+            }
+            $this->Board->create();
 			if ($this->Board->save($this->request->data)) {
+                move_uploaded_file($this->request->data['Board']['img']['tmp_name'], IMAGES . DS . $this->request->data['Board']['img']['name']);
 				$this->Session->setFlash(__('The board has been saved.'));
 				return $this->redirect(array('action' => 'index'));
 			} else {

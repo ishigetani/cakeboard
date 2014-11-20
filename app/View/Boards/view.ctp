@@ -27,6 +27,10 @@
 			&nbsp;
 		</dd>
 	</dl>
+    <br />
+    <?php if (!empty($board['Board']['img_pass'])): ?>
+        <?php echo $this->Html->image($board['Board']['img_pass']); ?>
+    <?php endif; ?>
 </div>
 <div class="actions">
 	<h3><?php echo __('Actions'); ?></h3>

@@ -6,6 +6,7 @@
 			<th><?php echo $this->Paginator->sort('id'); ?></th>
 			<th><?php echo $this->Paginator->sort('user_id'); ?></th>
 			<th><?php echo $this->Paginator->sort('content'); ?></th>
+            <th>画像有無</th>
 			<th><?php echo $this->Paginator->sort('created'); ?></th>
 			<th><?php echo $this->Paginator->sort('modified'); ?></th>
 			<th class="actions"><?php echo __('Actions'); ?></th>
@@ -19,6 +20,13 @@
 			<?php echo $this->Html->link($board['User']['name'], array('controller' => 'users', 'action' => 'view', $board['User']['id'])); ?>
 		</td>
 		<td><?php echo h($board['Board']['content']); ?>&nbsp;</td>
+        <td>
+            <?php if (!empty($board['Board']['img_pass'])): ?>
+                ○
+            <?php else: ?>
+                ×
+            <?php endif; ?>
+        </td>
 		<td><?php echo h($board['Board']['created']); ?>&nbsp;</td>
 		<td><?php echo h($board['Board']['modified']); ?>&nbsp;</td>
 		<td class="actions">

@@ -23,6 +23,39 @@ class Board extends AppModel {
 				//'on' => 'create', // Limit validation to 'create' or 'update' operations
 			),
 		),
+        'content' => array(
+            'notEmpty' => array(
+                'rule' => array('notEmpty'),
+                'message' => '必須項目です',
+            )
+        ),
+        'img_pass' => array(
+            'isUnique' => array(
+                'rule' => array('isUnique'),
+                'message' => 'すでにそのファイル名は保存されています',
+                'allowEmpty' => true,
+            )
+        ),
+        'img' => array(
+            // ルール：uploadError => errorを検証 (2.2 以降)
+            'upload-file' => array(
+                'rule' => array( 'uploadError'),
+                'message' => array( 'Error uploading file'),
+                'last' => true,
+            ),
+            'extension' => array(
+                //拡張子の指定
+                'rule' => array('extension',array('jpg','jpeg','gif','png')),
+                'message' => '画像ではありません。',
+                'allowEmpty' => true,
+            ),
+            'size' => array(
+                //画像サイズの制限
+                'rule' => array('fileSize', '<=', '500000'),
+                'message' => '画像サイズは500KB以下でお願いします',
+                'allowEmpty' => true
+            )
+        )
 	);
 
 	//The Associations below have been created with all possible keys, those that are not needed can be removed
