@@ -18,12 +18,6 @@
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
  */
 
-include_once './Ubench.php';
-$bench = new Ubench();
-
-// ベンチマーク開始
-$bench->start();
-
 /**
  * Use the DS to separate the directories in other defines
  */
@@ -112,9 +106,3 @@ $Dispatcher->dispatch(
 	new CakeRequest(),
 	new CakeResponse()
 );
-
-
-// ベンチマーク終了
-$bench->end();
-debug($bench->getMemoryUsage());
-debug($bench->getMemoryPeak());

@@ -20,6 +20,7 @@
  */
 
 App::uses('Controller', 'Controller');
+App::import('Vendor', 'Ubench');
 
 /**
  * Application Controller
@@ -31,7 +32,13 @@ App::uses('Controller', 'Controller');
  * @link		http://book.cakephp.org/2.0/en/controllers.html#the-app-controller
  */
 class AppController extends Controller {
-	public $components = array('Session',
+
+    /**
+     * @var $bench ベンチマーク用
+     */
+    public $bench;
+
+    public $components = array('Session',
         'Auth' => array(
             'authenticate' => array(
                 'Form' => array(
@@ -46,4 +53,21 @@ class AppController extends Controller {
             //ログインページのパス
             'loginAction' => array('controller' => 'users', 'action' => 'login'),
         ));
+
+    public function __construct(CakeRequest $request = null, CakeResponse $response = null) {
+        $this->bench = new Ubench();
+
+        // ベンチマーク開始
+        $this->bench->start();
+
+        parent::__construct($request, $response);
+    }
+
+    public function afterFilter() {
+        // ベンチマーク終了
+        $this->bench->end();
+
+        debug($this->bench->getMemoryUsage());
+        debug($this->bench->getMemoryPeak());
+    }
 }
