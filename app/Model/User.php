@@ -19,15 +19,15 @@ class User extends AppModel {
                 'rule' => 'alphaNumeric',
                 'required' => true,
                 'allowEmpty' => false,
-                'message' => '���[�U���̓A���t�@�x�b�g�Ɛ����œ�͂��ĉ�����'
+                'message' => '半角英数字のみです'
             ),
             'between' => array(
                 'rule' => array('between',3,20),
-                'message' => '���[�U����3�����ȏ�A20�����ȉ��œ�͂��ĉ�����'
+                'message' => '3文字以上20文字以内です'
             ),
             'unique' => array(
                 'rule' => 'isUnique',
-                'message' => '���̃��[�U���͊�Ɏg�p����Ă��܂�'
+                'message' => 'すでにそのLoginNameは使われています'
             )
         ),
         'password' => array(
@@ -35,18 +35,17 @@ class User extends AppModel {
                 'rule' => 'alphaNumeric',
                 'required' => true,
                 'allowEmpty' => false,
-                'message' => '�p�X���[�h�̓A���t�@�x�b�g�Ɛ����œ�͂��ĉ�����',
+                'message' => '半角英数字のみです',
                 'on' => 'create'
             ),
             'between' => array(
                 'rule' => array('between',3,20),
-                'message' => '�p�X���[�h��3�����ȏ�A20�����ȉ��œ�͂��ĉ�����',
+                'message' => '3文字以上20文字以内です',
                 'on' => 'create'
             )
         )
     );
- 
-    //���[�U���ƃp�X���[�h���o�^�ς݂��m�F
+
     public function check($data) {
         $n = $this->find('count', array(
                 'conditions' => array(
